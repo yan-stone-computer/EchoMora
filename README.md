@@ -11,13 +11,13 @@
 
 [3 分钟本地演示](#3-分钟启动) · [架构](#架构) · [教程](#五分钟教程观察记忆如何发生) · [接入 DeepSeek](#接入-deepseek) · [详细文档](docs/EchoMora架构详细说明.pdf)
 
-![EchoMora cover](docs/assets/cover.png)
+![EchoMora cover](https://cdn.jsdelivr.net/gh/yan-stone-computer/EchoMora@main/docs/assets/cover.png)
 
 大多数群聊 AI 不是记性差，它只是把聊天记录误当成了记忆：历史越长，上下文越贵；检索越多，隐私串线越危险；记忆越全，回复越像在念档案。
 
 EchoMora 换了一个问题：**这一轮到底应该想起什么？**
 
-![EchoMora interactive demo](docs/assets/demo.png)
+![EchoMora interactive demo](https://cdn.jsdelivr.net/gh/yan-stone-computer/EchoMora@main/docs/assets/demo.png)
 
 ## 它做了什么
 
@@ -31,7 +31,7 @@ EchoMora 换了一个问题：**这一轮到底应该想起什么？**
 
 ## 架构
 
-![EchoMora architecture](docs/assets/architecture.png)
+![EchoMora architecture](https://cdn.jsdelivr.net/gh/yan-stone-computer/EchoMora@main/docs/assets/architecture.png)
 
 可编辑矢量源：[architecture.svg](docs/assets/architecture.svg) · Mermaid 源：[architecture.mmd](docs/architecture.mmd)
 

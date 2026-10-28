@@ -4,7 +4,7 @@
 
 EchoMora is a local-first reference architecture for layered memory, GraphRAG, per-user relationship state, soft forgetting, and optional DeepSeek inference. The demo has no third-party Python dependencies and works fully offline.
 
-![EchoMora cover](docs/assets/cover.png)
+![EchoMora cover](https://cdn.jsdelivr.net/gh/yan-stone-computer/EchoMora@main/docs/assets/cover.png)
 
 ## Why another memory demo?
 
@@ -46,11 +46,11 @@ The inspector shows the actual recall score, graph hit, recency, and whether the
 
 Architecture and the full Chinese tutorial live in [docs/architecture.zh-CN.md](docs/architecture.zh-CN.md) and [docs/tutorial.zh-CN.md](docs/tutorial.zh-CN.md).
 
-![Interactive demo](docs/assets/demo.png)
+![Interactive demo](https://cdn.jsdelivr.net/gh/yan-stone-computer/EchoMora@main/docs/assets/demo.png)
 
 ## Architecture
 
-![Architecture](docs/assets/architecture.png)
+![Architecture](https://cdn.jsdelivr.net/gh/yan-stone-computer/EchoMora@main/docs/assets/architecture.png)
 
 ```text
 message
