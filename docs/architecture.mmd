@@ -1,0 +1,37 @@
+flowchart TD
+    Q[QQ / 微信 / Web 群消息] --> EV[(追加式事件日志)]
+    Q --> WM[瞬时工作记忆<br/>内存 FIFO 20–40 轮]
+    EV --> X[异步记忆抽取<br/>事实 · 情绪 · 重要性 · 置信度]
+
+    X --> VM[(中期向量记忆<br/>摘要 / 偏好 / 事件<br/>时间半衰期)]
+    X --> KG[(长期 GraphRAG<br/>实体 / 版本化断言 / 关系)]
+    X --> AF[关系状态<br/>每用户独立好感与情绪]
+
+    VM --> RG[可见性门控<br/>本人私有 + 群共享]
+    KG --> RG
+    RG --> CR[可解释召回控制器<br/>相关性 + 重要性 + 新鲜度 + 图谱 + 关系温度<br/>MMR 去冗余 → Top-N]
+    AF --> CR
+    WM --> CR
+
+    CR --> CTX[上下文预算装配<br/>近期原文 + 记忆来源 + 关系语气]
+    CTX --> LLM{推理引擎}
+    LLM -->|有 Key| DS[DeepSeek]
+    LLM -->|无 Key 或失败| OFF[本地离线回退]
+    DS --> OUT[群聊回复]
+    OFF --> OUT
+    OUT --> EV
+    OUT -.回复回写.-> X
+
+    SF[软遗忘调度器<br/>时间衰减 + 概率遗忘<br/>固定记忆保护] -.只降低召回概率.-> VM
+    SF -.版本化归档.-> KG
+    AF -.缓慢回归中性.-> AF
+
+    classDef hero fill:#fbebe7,stroke:#b94c3c,stroke-width:2px,color:#182326;
+    classDef store fill:#e8f1ef,stroke:#1f6b66,color:#182326;
+    classDef affect fill:#f7ecda,stroke:#9b6728,color:#182326;
+    classDef external fill:#f5f7f6,stroke:#8fa19a,color:#182326;
+    class CR hero;
+    class EV,VM,KG,WM store;
+    class AF,SF affect;
+    class Q,LLM,DS,OFF,OUT external;
+

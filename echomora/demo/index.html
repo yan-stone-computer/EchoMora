@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="EchoMora local-first demo: layered memory, GraphRAG, soft forgetting and relationship-aware group chat AI."
+    />
+    <title>EchoMora · 有记忆，也会淡忘</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="/" aria-label="EchoMora 首页">
+          <span class="brand-mark" aria-hidden="true">
+            <span></span><span></span><span></span>
+          </span>
+          <span class="brand-copy">
+            <strong>EchoMora</strong>
+            <small>回声记忆</small>
+          </span>
+        </a>
+
+        <div class="topbar-actions">
+          <div class="runtime" id="runtime" aria-live="polite">
+            <span class="runtime-dot"></span>
+            <span id="runtime-label">连接中</span>
+          </div>
+          <label class="user-picker">
+            <span>当前发言者</span>
+            <select id="user-select">
+              <option value="u_alice" data-name="小岚">小岚</option>
+              <option value="u_bob" data-name="小北">小北</option>
+            </select>
+          </label>
+        </div>
+      </header>
+
+      <main class="workspace">
+        <section class="chat-panel" aria-labelledby="chat-title">
+          <div class="panel-heading">
+            <div>
+              <h1 id="chat-title">今晚聊什么</h1>
+              <p>群聊「周末实验室」 · 记忆按用户隔离</p>
+            </div>
+            <button class="quiet-button" id="reset-button" type="button">
+              清空演示
+            </button>
+          </div>
+
+          <div class="chat-scroll" id="chat-scroll" aria-live="polite">
+            <div class="empty-chat" id="empty-chat">
+              <p class="empty-title">先让 EchoMora 认识你。</p>
+              <p>
+                说一件想长期记住的事，再换一个问法。右侧会显示它到底召回了什么，
+                以及忘记机制有没有介入。
+              </p>
+            </div>
+            <div class="message-list" id="message-list"></div>
+            <div class="typing-row is-hidden" id="typing-row" aria-label="EchoMora 正在思考">
+              <div class="avatar">E</div>
+              <div class="typing-bubble"><span></span><span></span><span></span></div>
+            </div>
+          </div>
+
+          <div class="composer-zone">
+            <div class="prompt-strip" aria-label="演示提示">
+              <button type="button" data-prompt="请记住：我不吃甜食，最近在减脂。">
+                存入一条偏好
+              </button>
+              <button type="button" data-prompt="你还记得我为什么不吃甜食吗？">
+                测试召回
+              </button>
+              <button type="button" data-prompt="今天项目过审了，我特别开心。">
+                带情绪地聊天
+              </button>
+            </div>
+            <form class="composer" id="composer">
+              <label class="sr-only" for="message-input">发送群聊消息</label>
+              <textarea
+                id="message-input"
+                rows="2"
+                maxlength="4000"
+                placeholder="输入消息。Enter 发送，Shift + Enter 换行"
+                required
+              ></textarea>
+              <button class="send-button" id="send-button" type="submit">
+                发送
+              </button>
+            </form>
+            <p class="composer-note">
+              DeepSeek 未配置时自动使用离线规则引擎；两种模式共用同一套记忆循环。
+            </p>
+          </div>
+        </section>
+
+        <aside class="memory-panel" aria-labelledby="memory-title">
+          <div class="memory-heading">
+            <div>
+              <h2 id="memory-title">记忆观察台</h2>
+              <p id="memory-subtitle">先发一条消息，观察筛选过程。</p>
+            </div>
+            <button class="quiet-button" id="sleep-button" type="button">
+              执行睡眠整理
+            </button>
+          </div>
+
+          <section class="affect-strip" aria-label="关系状态">
+            <div class="affect-main">
+              <span class="data-label">当前关系</span>
+              <strong id="affect-label">普通</strong>
+            </div>
+            <div class="affect-meter" aria-hidden="true">
+              <span id="affect-meter-fill"></span>
+            </div>
+            <div class="affect-value" id="affect-value">0 / ±50</div>
+          </section>
+
+          <section class="inspector-section">
+            <div class="section-line">
+              <h3>本轮召回</h3>
+              <span id="recall-count">0 条</span>
+            </div>
+            <div class="recall-list" id="recall-list">
+              <p class="empty-note">还没有触发召回。</p>
+            </div>
+          </section>
+
+          <section class="inspector-section">
+            <div class="section-line">
+              <h3>知识图谱</h3>
+              <span id="graph-count">0 个节点</span>
+            </div>
+            <div class="graph-wrap" id="graph-wrap">
+              <svg
+                id="graph-svg"
+                viewBox="0 0 560 270"
+                role="img"
+                aria-label="当前用户可见的实体关系图"
+              ></svg>
+              <p class="empty-note" id="graph-empty">图谱会随长时记忆出现。</p>
+            </div>
+          </section>
+
+          <section class="inspector-section memory-bank">
+            <div class="section-line">
+              <h3>记忆库</h3>
+              <span id="memory-count">0 条</span>
+            </div>
+            <div class="memory-list" id="memory-list">
+              <p class="empty-note">当前用户还没有可见记忆。</p>
+            </div>
+          </section>
+        </aside>
+      </main>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="app.js" defer></script>
+  </body>
+</html>
+

@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "echomora"
+version = "0.1.0"
+description = "A local-first memory and affect architecture demo for group-chat AI companions."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "EchoMora contributors" }]
+keywords = ["ai", "memory", "graphrag", "deepseek", "chatbot", "agent"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+]
+dependencies = []
+
+[project.scripts]
+echomora = "echomora.__main__:main"
+
+[tool.setuptools]
+packages = ["echomora"]
+
+[tool.setuptools.package-data]
+echomora = ["demo/*.html", "demo/*.css", "demo/*.js", "demo/*.svg"]
+

@@ -1,0 +1,30 @@
+{
+  "assets": [
+    {
+      "path": "cover.png",
+      "role": "decorative cover concept",
+      "source": "local ComfyUI Qwen-Image-2.1",
+      "seed": 20261028,
+      "resolution": "1024x576",
+      "note": "No text, logos, or technical claims are embedded in the image. The Qwen Research License applies to generated model output; this asset is not presented as a technical diagram."
+    },
+    {
+      "path": "architecture.svg",
+      "role": "editable technical architecture schematic",
+      "source": "hand-authored SVG",
+      "note": "Fonts are not outlined. Element IDs map to the named modules and flows."
+    },
+    {
+      "path": "architecture.png",
+      "role": "raster preview of architecture.svg",
+      "source": "local browser render at 2x display size",
+      "resolution": "1384x882"
+    },
+    {
+      "path": "demo.png",
+      "role": "interactive demo screenshot",
+      "source": "Playwright screenshot of the local EchoMora server",
+      "resolution": "1440x1000"
+    }
+  ]
+}

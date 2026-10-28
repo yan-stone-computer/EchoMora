@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="183mm" height="116.5mm"
+     viewBox="0 0 732 466"
+     role="img"
+     aria-labelledby="figure-title figure-desc">
+  <title id="figure-title">EchoMora 分层记忆与情感协同架构</title>
+  <desc id="figure-desc">群聊消息进入瞬时记忆与记忆抽取模块；抽取结果写入向量记忆、版本化知识图谱和用户隔离的关系状态；召回控制器先执行可见性门控，再融合相关性、时间、重要性和关系温度筛选记忆，装配上下文后交由 DeepSeek 或离线引擎生成回复。软遗忘调度器只降低低权重记忆的召回概率，固定记忆始终受保护。</desc>
+  <defs>
+    <marker id="arrowFlow" viewBox="0 0 10 10" refX="8.5" refY="5"
+            markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 Z" fill="#386B73"/>
+    </marker>
+    <marker id="arrowControl" viewBox="0 0 10 10" refX="8.5" refY="5"
+            markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 Z" fill="#A86B2D"/>
+    </marker>
+    <marker id="arrowHero" viewBox="0 0 10 10" refX="8.5" refY="5"
+            markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 Z" fill="#B84E3D"/>
+    </marker>
+    <style>
+      text {
+        font-family: "Microsoft YaHei", "Noto Sans CJK SC", "Arial", sans-serif;
+        fill: #23313E;
+      }
+      .title { font-size: 18px; font-weight: 700; }
+      .subtitle { font-size: 10px; fill: #53636F; }
+      .layer { font-size: 10px; font-weight: 700; }
+      .box-title { font-size: 10.5px; font-weight: 700; }
+      .body { font-size: 9px; }
+      .small { font-size: 8.5px; fill: #4F5E69; }
+      .tag { font-size: 8px; font-weight: 700; }
+      .flow-line { fill: none; stroke: #386B73; stroke-width: 1.55; stroke-linecap: round; stroke-linejoin: round; }
+      .hero-line { fill: none; stroke: #B84E3D; stroke-width: 2.05; stroke-linecap: round; stroke-linejoin: round; }
+      .control-line { fill: none; stroke: #A86B2D; stroke-width: 1.25; stroke-dasharray: 5 4; stroke-linecap: round; stroke-linejoin: round; }
+      .box { stroke: #8EA3AD; stroke-width: 1; }
+      .container { fill: #FAFCFC; stroke: #AEBFC6; stroke-width: 0.9; }
+      .pale { fill: #ECF4F4; }
+      .pale-strong { fill: #DDEBEC; }
+      .white { fill: #FFFFFF; }
+      .emotion { fill: #FFF4DF; stroke: #D3A257; }
+      .hero { fill: #FBEAE6; stroke: #B84E3D; stroke-width: 1.5; }
+      .scheduler { fill: #FFF9EF; stroke: #C58B43; stroke-width: 1.1; }
+      .prompt { fill: #F3F6F7; stroke: #94A8B3; }
+      .output { fill: #E9F0F1; stroke: #6D8A96; }
+    </style>
+  </defs>
+
+  <rect width="732" height="456" fill="#FFFFFF"/>
+
+  <g id="n:title">
+    <text class="title" x="28" y="25">EchoMora 分层记忆与情感协同架构</text>
+    <text class="subtitle" x="28" y="43">事件可回放 · 记忆可解释 · 关系有边界 · 遗忘可恢复</text>
+  </g>
+
+  <g id="c:working-memory">
+    <rect class="container" x="26" y="58" width="164" height="140" rx="8"/>
+    <text class="layer" x="39" y="76">事件与工作记忆</text>
+
+    <g id="n:group-input">
+      <rect class="pale-strong box" x="38" y="88" width="140" height="44" rx="6"/>
+      <text class="box-title" x="108" y="105" text-anchor="middle">群聊消息输入</text>
+      <text class="small" x="108" y="120" text-anchor="middle">发言 · @ · 图片 · 指令</text>
+    </g>
+
+    <g id="n:transient-memory">
+      <rect class="pale box" x="38" y="146" width="140" height="42" rx="6"/>
+      <text class="box-title" x="108" y="162" text-anchor="middle">瞬时记忆层</text>
+      <text class="small" x="108" y="177" text-anchor="middle">事件落库 · 内存 FIFO 20–40 轮</text>
+    </g>
+  </g>
+
+  <g id="c:memory-pipeline">
+    <rect class="container" x="214" y="58" width="284" height="382" rx="9"/>
+    <text class="layer" x="227" y="76">记忆抽取、存储与调度</text>
+
+    <g id="n:extractor">
+      <rect class="pale-strong box" x="226" y="86" width="260" height="52" rx="6"/>
+      <text class="box-title" x="356" y="103" text-anchor="middle">记忆抽取 &amp; 情感标注</text>
+      <text class="small" x="356" y="119" text-anchor="middle">事实 · 情绪/强度 · 重要性 0–10 · Flash</text>
+    </g>
+
+    <g id="c:memory-store">
+      <rect x="226" y="158" width="260" height="88" rx="7" fill="#FFFFFF" stroke="#AEBFC6" stroke-width="0.9"/>
+      <text class="tag" x="238" y="172" fill="#386B73">中期 + 长期存储</text>
+
+      <g id="n:vector-memory">
+        <rect class="pale box" x="237" y="180" width="112" height="52" rx="5"/>
+        <text class="box-title" x="293" y="196" text-anchor="middle">中期向量记忆</text>
+        <text class="small" x="293" y="210" text-anchor="middle">摘要 · 偏好 · 事件</text>
+        <text class="small" x="293" y="223" text-anchor="middle">半衰期 + 时间衰减</text>
+      </g>
+
+      <g id="n:graph-memory">
+        <rect class="pale box" x="362" y="180" width="112" height="52" rx="5"/>
+        <text class="box-title" x="418" y="196" text-anchor="middle">长期 GraphRAG</text>
+        <text class="small" x="418" y="210" text-anchor="middle">断言版本化 · 冲突消解</text>
+        <text class="small" x="418" y="223" text-anchor="middle">增量写入 + 夜间合并</text>
+      </g>
+    </g>
+
+    <g id="n:affection">
+      <rect class="emotion box" x="226" y="258" width="154" height="46" rx="6"/>
+      <text class="box-title" x="303" y="274" text-anchor="middle">好感与情绪状态</text>
+      <text class="small" x="303" y="288" text-anchor="middle">用户隔离 · 可查看可重置</text>
+      <text class="small" x="303" y="300" text-anchor="middle">只调语气，不越安全边界</text>
+    </g>
+
+    <g id="n:recall-controller">
+      <rect class="hero" x="226" y="316" width="260" height="62" rx="7"/>
+      <rect x="226" y="316" width="6" height="62" rx="3" fill="#B84E3D"/>
+      <text class="box-title" x="356" y="333" text-anchor="middle">可解释召回控制器</text>
+      <text class="body" x="356" y="350" text-anchor="middle">相关性 + 重要性 + 新鲜度 + 关系温度</text>
+      <text class="small" x="356" y="366" text-anchor="middle">可见性门控 → MMR 去冗余 → Top-N</text>
+    </g>
+
+    <g id="n:forgetting">
+      <rect class="scheduler" x="226" y="390" width="260" height="42" rx="6"/>
+      <text class="box-title" x="356" y="406" text-anchor="middle">软遗忘调度器</text>
+      <text class="small" x="356" y="421" text-anchor="middle">夜间低权重：软遗忘 · 可恢复 · 高重要保护</text>
+    </g>
+  </g>
+
+  <g id="c:generation">
+    <rect class="container" x="526" y="58" width="180" height="382" rx="9"/>
+    <text class="layer" x="539" y="76">上下文装配、推理与输出</text>
+
+    <g id="n:prompt-assembly">
+      <rect class="prompt" x="538" y="96" width="156" height="126" rx="7"/>
+      <text class="box-title" x="616" y="114" text-anchor="middle">上下文装配</text>
+      <line x1="553" y1="126" x2="679" y2="126" stroke="#B9C6CC" stroke-width="0.8"/>
+      <circle cx="555" cy="142" r="2.8" fill="#386B73"/>
+      <text class="body" x="565" y="145">近期原文窗口</text>
+      <circle cx="555" cy="162" r="2.8" fill="#386B73"/>
+      <text class="body" x="565" y="165">Top-N 记忆与来源</text>
+      <circle cx="555" cy="182" r="2.8" fill="#C58B43"/>
+      <text class="body" x="565" y="185">关系温度 + 情绪标签</text>
+      <rect x="550" y="197" width="132" height="16" rx="8" fill="#E3EBED"/>
+      <text class="small" x="616" y="208" text-anchor="middle">硬上限：按 token 预算截断</text>
+    </g>
+
+    <g id="n:deepseek">
+      <rect class="pale-strong box" x="538" y="248" width="156" height="58" rx="7"/>
+      <text class="box-title" x="616" y="268" text-anchor="middle">DeepSeek / 离线回退</text>
+      <text class="small" x="616" y="284" text-anchor="middle">受控语气 · 事实边界</text>
+      <text class="small" x="616" y="297" text-anchor="middle">回复生成</text>
+    </g>
+
+    <g id="n:reply">
+      <rect class="output" x="538" y="332" width="156" height="46" rx="7"/>
+      <text class="box-title" x="616" y="350" text-anchor="middle">群聊回复输出</text>
+      <text class="small" x="616" y="366" text-anchor="middle">发送 · 记账 · 成败回执</text>
+    </g>
+
+    <g id="n:feedback">
+      <rect x="556" y="397" width="120" height="34" rx="17" fill="#FFFFFF" stroke="#B84E3D" stroke-width="1.1" stroke-dasharray="4 3"/>
+      <text class="small" x="616" y="418" text-anchor="middle">回写 → 下一轮抽取</text>
+    </g>
+  </g>
+
+  <g id="e:input-branches">
+    <path class="flow-line" d="M 108 132 L 108 138" marker-end="url(#arrowFlow)"/>
+    <path class="flow-line" d="M 178 110 L 226 110" marker-end="url(#arrowFlow)"/>
+    <path class="flow-line" d="M 178 168 L 198 168 L 198 347 L 226 347" marker-end="url(#arrowFlow)"/>
+    <text class="small" x="192" y="230" transform="rotate(-90 192 230)" text-anchor="middle">短期上下文注入</text>
+  </g>
+
+  <g id="e:extract-to-store">
+    <path class="flow-line" d="M 293 138 L 293 180" marker-end="url(#arrowFlow)"/>
+    <path class="flow-line" d="M 418 138 L 418 180" marker-end="url(#arrowFlow)"/>
+    <path class="flow-line" d="M 226 106 L 216 106 L 216 281 L 226 281" marker-end="url(#arrowFlow)"/>
+  </g>
+
+  <g id="e:store-to-controller">
+    <path class="flow-line" d="M 418 246 L 418 316" marker-end="url(#arrowFlow)"/>
+    <path class="flow-line" d="M 303 304 L 303 316" marker-end="url(#arrowFlow)"/>
+    <text class="small" x="428" y="299">混合召回</text>
+  </g>
+
+  <g id="e:forget-control">
+    <path class="control-line" d="M 486 411 L 492 411 L 492 202 L 486 202" marker-end="url(#arrowControl)"/>
+    <text class="small" x="489" y="340" transform="rotate(-90 489 340)" text-anchor="middle">调整召回概率</text>
+  </g>
+
+  <g id="e:controller-to-prompt">
+    <path class="hero-line" d="M 486 347 L 506 347 L 506 229 L 538 229" marker-end="url(#arrowHero)"/>
+    <text class="small" x="516" y="221" text-anchor="middle">装配</text>
+  </g>
+
+  <g id="e:prompt-to-llm">
+    <path class="hero-line" d="M 616 222 L 616 248" marker-end="url(#arrowHero)"/>
+  </g>
+
+  <g id="e:llm-to-output">
+    <path class="hero-line" d="M 616 306 L 616 332" marker-end="url(#arrowHero)"/>
+  </g>
+
+  <g id="e:output-feedback">
+    <path class="control-line" d="M 616 378 L 616 397" marker-end="url(#arrowControl)"/>
+    <path class="control-line" d="M 556 414 L 206 414 L 206 130 L 226 130" marker-end="url(#arrowControl)"/>
+    <text class="small" x="360" y="459" text-anchor="middle">闭环：回复发送后记录、抽取、再入记忆</text>
+  </g>
+
+  <g id="n:key-constraint">
+    <rect x="538" y="274" width="156" height="0.01" fill="none"/>
+  </g>
+</svg>
